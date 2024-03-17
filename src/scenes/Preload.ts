@@ -16,12 +16,11 @@ export default class Preload extends Phaser.Scene {
     const actions: [animationName: string, frameCount: number][] = [['walk', 4], ['carry', 4], ['attack', 4], ['grab', 3]]
     const directions = ['up', 'down', 'left', 'right']
 
-    // create animations for walking, carrying, and attacking in all directions
     actions.forEach(([animationName, frameCount]) => {
-      directions.forEach((dir) => {
+      directions.forEach((direction) => {
         this.anims.create({
-          key: `player-${animationName}-${dir}`,
-          frames: this.anims.generateFrameNames('player', { start: 1, end: frameCount, prefix: `${animationName}-${dir}-`, suffix: '.png' }),
+          key: `player-${animationName}-${direction}`,
+          frames: this.anims.generateFrameNames('player', { start: 1, end: frameCount, prefix: `${animationName}-${direction}-`, suffix: '.png' }),
           repeat: -1,
           frameRate: 8
         })
