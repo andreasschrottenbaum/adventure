@@ -20,6 +20,7 @@ export default class Game extends Phaser.Scene {
   create() {
     const map = this.make.tilemap({ key: 'home' })
     const tileset = map.addTilesetImage('overworld', 'overworld')!
+    this.physics.world.TILE_BIAS = 48; // todo: re-sprite the character to be 48x48
 
     this.grassLayer = map.createLayer('gras', tileset) || undefined
     this.grassLayer?.setCollisionByProperty({ collides: true })
@@ -41,14 +42,14 @@ export default class Game extends Phaser.Scene {
     const speed = 200
 
     let action = 'walk'
-    if (this.input?.keyboard?.keys[Phaser.Input.Keyboard.KeyCodes.SPACE]?.isDown) {
+    if (this.cursors.space?.isDown) {
       action = 'attack'
     }
 
-    if (this.input?.keyboard?.keys[Phaser.Input.Keyboard.KeyCodes.SHIFT]?.isDown) {
+    if (this.cursors.shift?.isDown) {
       action = 'carry'
       
-      if (this.input?.keyboard?.keys[Phaser.Input.Keyboard.KeyCodes.SPACE]?.isDown) {
+      if (this.cursors.space?.isDown) {
         action = 'grab'
       }
     }
